@@ -1,8 +1,8 @@
 {
     "name": "com.stratus.ui",
-    "version": "1.0.0-preview",
+    "version": "0.1.0-preview",
     "displayName": "Stratus UI",
-    "description": "The UI module for the Stratus framework",
+    "description": "The UI package for the Stratus Framework",
     "unity": "2019.1",
     "unityRelease": "0b5",
     "dependencies": {
