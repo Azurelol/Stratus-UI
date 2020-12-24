@@ -1,2 +1,2 @@
 # Stratus-UI
-The UI moduile of the Stratus Framework
+The UI module of the Stratus Framework, providing components and utilities for runtime UIs.

@@ -6,7 +6,7 @@
     "unity": "2019.1",
     "unityRelease": "0b5",
     "dependencies": {
-      "com.stratus.core": "1.0.0",
+      "com.stratus.core": "0.1.0",
       "com.unity.textmeshpro": "2.0.1"
     },
     "keywords": [
