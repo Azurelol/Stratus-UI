@@ -69,13 +69,13 @@ namespace Stratus.UI
 		//------------------------------------------------------------------------/
 		// Methods
 		//------------------------------------------------------------------------/
-		public StratusValidation Set(IEnumerable<EntryType> entries)
+		public StratusOperationResult Set(IEnumerable<EntryType> entries)
 		{
 			if (layoutGroup == null)
 			{
 				string msg = "No layout group has been set";
 				this.LogError(msg);
-				return new StratusValidation(false, msg);
+				return new StratusOperationResult(false, msg);
 			}
 			Reset();
 			if (_instances == null)
@@ -97,7 +97,7 @@ namespace Stratus.UI
 			return true;
 		}
 
-		public StratusValidation Set(params EntryType[] elements) => Set((IEnumerable<EntryType>)elements);
+		public StratusOperationResult Set(params EntryType[] elements) => Set((IEnumerable<EntryType>)elements);
 
 		public void Refresh()
 		{
