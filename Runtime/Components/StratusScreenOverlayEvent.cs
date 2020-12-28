@@ -5,7 +5,7 @@ using Stratus;
 
 namespace Stratus.UI
 {
-	public class StratusScreenOverlayEvent : StratusTriggerable
+	public class StratusScreenOverlayEvent : StratusTriggerableBehaviour
 	{
 		protected override void OnAwake()
 		{

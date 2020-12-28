@@ -5,7 +5,7 @@ using Stratus;
 
 namespace Stratus.Experimental
 {
-  public class StratusScreenTransitionEvent : StratusTriggerable
+  public class StratusScreenTransitionEvent : StratusTriggerableBehaviour
   {
     public StratusScreenShaderTransition.TransitionEvent transition = new StratusScreenShaderTransition.TransitionEvent();
 
