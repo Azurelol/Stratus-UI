@@ -129,7 +129,7 @@ namespace Stratus.UI
 				case StratusConsoleCommand.History.EntryType.Result:
 				case StratusConsoleCommand.History.EntryType.Warning:
 				case StratusConsoleCommand.History.EntryType.Error:
-					this.history = this.history.AppendLine($"[{e.timestamp.ToRichText(Color.green)}] {e.text.ToRichText(GetEntryColor(e.type))}");
+					this.history = this.history.AppendLines($"[{e.timestamp.ToRichText(Color.green)}] {e.text.ToRichText(GetEntryColor(e.type))}");
 					break;
 			}
 		}

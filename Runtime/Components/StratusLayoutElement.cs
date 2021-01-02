@@ -242,7 +242,7 @@ namespace Stratus.UI
 				}
 			}
 
-			gameObject.name = entry.label.TruncateWithEllipsis(20);
+			gameObject.name = entry.label.Truncate(20);
 
 			OnUpdateContent(this.entry);
 		}
