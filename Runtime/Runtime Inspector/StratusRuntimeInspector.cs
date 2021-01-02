@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -68,12 +70,10 @@ namespace Stratus.UI
 		public void Select()
 		{
 			serializedFieldObjects.First().Select();
-
 		}
 
 		public void Deselect()
 		{
-
 		}
 
 		public void SendInputToDrawer(Vector2 dir)
