@@ -145,7 +145,7 @@ namespace Stratus.UI
                 return;
             }
             updatingValue = true;
-            inputField.text = isPercentage ? value.ToPercentageRoundedString() 
+            inputField.text = isPercentage ? value.FromPercentRoundedString() 
                 : value.ToString();
             updatingValue = false;
         }

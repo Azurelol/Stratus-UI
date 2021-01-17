@@ -40,7 +40,7 @@ namespace Stratus.UI
         public  void SetProgress(float value)
         {
             slider.value = value;
-            text.text = value.ToPercentageString();
+            text.text = value.FromPercentString();
         }
 
     }
