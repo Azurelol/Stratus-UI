@@ -190,7 +190,7 @@ namespace Stratus.UI
 		protected virtual string GetDetails(SaveType save)
 		{
 			Dictionary<string, string> details = save.ComposeDetailedStringMap();
-			return details.ToKeyValueString();
+			return details.ToString(" : ");
 		}
 	}
 

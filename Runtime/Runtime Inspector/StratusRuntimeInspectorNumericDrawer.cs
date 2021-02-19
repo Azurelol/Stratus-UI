@@ -74,7 +74,7 @@ namespace Stratus.UI
                 throw new Exception("Unsupported field type for numeric drawer...");
             }
 
-            RangeAttribute range = (RangeAttribute)settings.field.attributesByType.GetValueOrNull(typeof(RangeAttribute));
+            RangeAttribute range = (RangeAttribute)settings.field.attributesByType.GetValueOrDefault(typeof(RangeAttribute));
             if (range != null)
             {
                 slider.minValue = range.min;
