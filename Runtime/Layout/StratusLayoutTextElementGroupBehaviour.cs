@@ -12,6 +12,10 @@ namespace Stratus.UI
 		StratusLayoutElementGroupBehaviour<StratusLayoutTextElement,
 			StratusLayoutTextElementEntry, StratusLayoutTextElementStyle>
 	{
+		public void Add(string text)
+		{
+			Add(new StratusLayoutTextElementEntry(text));
+		}
 	}
 
 }

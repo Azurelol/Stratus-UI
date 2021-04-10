@@ -1,9 +1,12 @@
 using System.Linq;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 // https://forum.unity.com/threads/change-the-value-of-a-toggle-without-triggering-onvaluechanged.275056/
 
-namespace Stratus
+namespace Stratus.UI
 {
 	public static partial class Extensions
 	{
@@ -51,6 +54,18 @@ namespace Stratus
 		public static string[] GetDisplayOptions(this TMPro.TMP_Dropdown dropdown)
 		{
 			return dropdown.options.Select(x => x.text).ToArray();
+		}
+
+		public static void ApplyScrollPosition(this ScrollRect sr, float verticalPos)
+		{
+			IEnumerator routine()
+			{
+				yield return new WaitForEndOfFrame();
+				sr.verticalNormalizedPosition = verticalPos;
+				LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)sr.transform);
+			}
+
+			sr.StartCoroutine(routine());
 		}
 
 	}

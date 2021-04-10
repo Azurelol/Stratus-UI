@@ -49,21 +49,21 @@ namespace Stratus.UI
 		//------------------------------------------------------------------------/
 		public void Reset()
 		{
-			if (_instances != null)
+			scrollRect = GetComponent<ScrollRect>();
+			if (scrollRect)
 			{
-				_instances.DestroyGameObjectsAndClear();
-			}
-			switch (orientation)
-			{
-				case StratusOrientation.Horizontal:
-					contentSizeFitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
-					contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.Unconstrained;
-					contentTransform.SetHeight(style.bodyHeight);
-					break;
-				case StratusOrientation.Vertical:
-					contentSizeFitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
-					contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-					break;
+				switch (orientation)
+				{
+					case StratusOrientation.Horizontal:
+						contentSizeFitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+						contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.Unconstrained;
+						contentTransform.SetHeight(style.bodyHeight);
+						break;
+					case StratusOrientation.Vertical:
+						contentSizeFitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+						contentSizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+						break;
+				}
 			}
 		}
 
@@ -78,7 +78,17 @@ namespace Stratus.UI
 				this.LogError(msg);
 				return new StratusOperationResult(false, msg);
 			}
-			Reset();
+			Clear();
+			Add(entries);
+			return true;
+		}
+
+		public StratusOperationResult Set(params EntryType[] elements) => Set((IEnumerable<EntryType>)elements);
+
+		public void Add(params EntryType[] entries) => Add((IEnumerable<EntryType>)entries);
+
+		public void Add(IEnumerable<EntryType> entries)
+		{
 			if (_instances == null)
 			{
 				_instances = new List<ElementType>();
@@ -95,10 +105,11 @@ namespace Stratus.UI
 			{
 				SetExplicitNavigation();
 			}
-			return true;
 		}
-
-		public StratusOperationResult Set(params EntryType[] elements) => Set((IEnumerable<EntryType>)elements);
+		public void Clear()
+		{
+			_instances?.DestroyGameObjectsAndClear();
+		}
 
 		public void Refresh()
 		{
@@ -172,11 +183,6 @@ namespace Stratus.UI
 				selectedInstance = navigator.Previous();
 				selectedInstance?.Select();
 			}
-		}
-
-		public void Clear()
-		{
-			_instances?.DestroyGameObjectsAndClear();
 		}
 
 		public StratusInputUILayer GetInputLayer()

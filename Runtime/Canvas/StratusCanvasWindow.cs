@@ -91,7 +91,7 @@ namespace Stratus.UI
 		public class RedirectInputEvent : StratusEvent { public StratusCanvasWindow<T> Window; }
 
 		public class BaseEvent : StratusEvent
-		{			
+		{
 		}
 
 		public class OpenEvent : BaseEvent
@@ -149,6 +149,12 @@ namespace Stratus.UI
 		/// </summary>
 		[SerializeField]
 		private bool closeOnCancelInput = false;
+
+		/// <summary>
+		/// Whether the gameobject should be disabled when this window is closed
+		/// </summary>
+		[SerializeField]
+		private bool disableGameObjectOnClose;
 
 		/// <summary>
 		/// The first selectable to be selected when this widow is opened
@@ -264,6 +270,8 @@ namespace Stratus.UI
 		/// If this window is opened upon the request of another, that is its parent
 		/// </summary>
 		public IStratusCanvasWindow parentWindow => openingArguments?.parent;
+
+		private GraphicRaycaster graphicRaycaster { get; set; }
 
 		//------------------------------------------------------------------------/
 		// Abstract
@@ -447,7 +455,9 @@ namespace Stratus.UI
 			if (canvas == null)
 			{
 				this.LogError("No canvas has been set");
+				throw new Exception("No canvas has been set");
 			}
+			graphicRaycaster = canvas.GetComponent<GraphicRaycaster>();
 			initialized = false;
 			if (_selectableOnOpen != null)
 			{
@@ -562,7 +572,14 @@ namespace Stratus.UI
 
 		private void OnToggleTransition(bool open, Action onFinished)
 		{
-			this.canvas.enabled = open;
+			if (disableGameObjectOnClose)
+			{
+				this.canvas.gameObject.SetActive(open);
+			}
+			else
+			{
+				this.canvas.enabled = this.graphicRaycaster.enabled = open;
+			}
 			OnTransition(open, onFinished);
 		}
 

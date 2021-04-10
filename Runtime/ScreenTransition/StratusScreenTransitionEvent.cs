@@ -5,24 +5,24 @@ using Stratus;
 
 namespace Stratus.Experimental
 {
-  public class StratusScreenTransitionEvent : StratusTriggerableBehaviour
-  {
-    public StratusScreenShaderTransition.TransitionEvent transition = new StratusScreenShaderTransition.TransitionEvent();
+	public class StratusScreenTransitionEvent : StratusTriggerableBehaviour
+	{
+		public StratusScreenShaderTransition.TransitionEvent transition = new StratusScreenShaderTransition.TransitionEvent();
 
-    protected override void OnAwake()
-    {
-    }
+		protected override void OnAwake()
+		{
+		}
 
-    protected override void OnReset()
-    {
+		protected override void OnReset()
+		{
 
-    }
+		}
 
-    protected override void OnTrigger()
-    {
-      StratusScene.Dispatch<StratusScreenShaderTransition.TransitionEvent>(this.transition);
-    }
+		protected override void OnTrigger(object data = null)
+		{
+			StratusScene.Dispatch<StratusScreenShaderTransition.TransitionEvent>(this.transition);
+		}
 
-  }
+	}
 
 }

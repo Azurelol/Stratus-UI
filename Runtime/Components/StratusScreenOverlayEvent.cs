@@ -17,7 +17,7 @@ namespace Stratus.UI
 			throw new System.NotImplementedException();
 		}
 
-		protected override void OnTrigger()
+		protected override void OnTrigger(object data = null)
 		{
 			throw new System.NotImplementedException();
 		}

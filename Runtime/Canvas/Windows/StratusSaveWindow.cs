@@ -89,41 +89,13 @@ namespace Stratus.UI
 			saveSystem.LoadAllSaves();
 
 			List<StratusLayoutTextElementEntry> entries = new List<StratusLayoutTextElementEntry>();
-			for (int i = 0; i < saveSystem.saveLimit; ++i)
+			foreach(SaveType save in saveSystem.saves)
 			{
-				int saveIndex = i;
-				StratusLayoutTextElementEntry entry = null;
-
-				// Found save
-				if (saveSystem.HasSaveAtIndex(saveIndex))
-				{
-					SaveType save = saveSystem.GetSaveAtIndex(saveIndex);
-					entry = new StratusLayoutTextElementEntry(GenerateSaveEntryName(save), () => Submit(save));
-					entry.onSelect = () => Select(save);
-				}
-
-				// Empty
-				else
-				{
-					entry = new StratusLayoutTextElementEntry($"{saveIndex}.");
-					Action onSubmit = () =>
-					{
-						switch (mode)
-						{
-							case StratusSaveWindowMode.Save:
-								CreateSaveAtIndex(currentSave, saveIndex, entry);
-								break;
-							case StratusSaveWindowMode.Load:
-
-								break;
-						}
-
-					};
-					entry.onSubmit = onSubmit;
-					entry.onSelect = () => Select(null);
-				}
-				entries.Add(entry);
+				StratusLayoutTextElementEntry entry = new StratusLayoutTextElementEntry(GenerateSaveEntryName(save), 
+					() => Submit(save));
+				entry.onSelect = () => Select(save);
 			}
+
 			layout.Set(entries);
 			layout.Select();
 		}
@@ -149,16 +121,15 @@ namespace Stratus.UI
 
 		protected virtual string GenerateSaveEntryName(SaveType save)
 		{
-			return $"{save.index}. {save.name}";
+			return $"{save.name}";
 		}
 
 		private void CreateSaveAtIndex(SaveType save, int index, StratusLayoutTextElementEntry entry)
 		{
 			this.Log($"Saving current save to index {index}");
-			save.index = index;
 			saveSystem.Save(currentSave);
 
-			entry.label = GenerateSaveEntryName(save);
+			entry.text = new StratusValue<string>(GenerateSaveEntryName(save));
 			entry.onSelect = () => Select(currentSave);
 			entry.onSubmit = () => Submit(currentSave);
 			entry.SetDirty();

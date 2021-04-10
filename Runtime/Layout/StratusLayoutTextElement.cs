@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 namespace Stratus.UI
 {
-	[Serializable]
+	#region Data
 	public class StratusLayoutTextElementEntry : StratusLayoutElementEntry
 	{
-		public StratusValue<Sprite> icon;
+		public StratusValue<Sprite> icon { get; set; }
+		public StratusValue<string> header { get; set; }
 
 		public StratusLayoutTextElementEntry()
 		{
@@ -34,6 +35,8 @@ namespace Stratus.UI
 		public int fontSize = 12;
 		public bool richText = true;
 		public bool autoSizeText = false;
+		public bool hideIconFrame = true;
+		public int iconSize = 0;
 		public TextAlignmentOptions textAlignment = TextAlignmentOptions.MidlineGeoAligned;
 	}
 
@@ -41,7 +44,8 @@ namespace Stratus.UI
 	public class StratusLayoutTextElementStyle : StratusLayoutElementStyle
 	{
 		public StratusTextStyle textStyle = new StratusTextStyle();
-	}
+	} 
+	#endregion
 
 	/// <summary>
 	/// An layout entry that uses a text component 
@@ -53,9 +57,11 @@ namespace Stratus.UI
 		// Fields
 		//------------------------------------------------------------------------/
 		[SerializeField]
-		private Image iconComponent;
+		private LayoutGroup layout;
 		[SerializeField]
-		private RectTransform iconFrame;
+		private Image iconFrame;
+		[SerializeField]
+		private TextMeshProUGUI headerFrame;
 
 		//------------------------------------------------------------------------/
 		// Properties
@@ -74,26 +80,21 @@ namespace Stratus.UI
 
 		public Sprite icon
 		{
-			get => iconComponent.sprite;
-			set => iconComponent.sprite = value;
+			get => iconFrame.sprite;
+			set => iconFrame.sprite = value;
 		}
 
-		public bool hasIcon => icon != null;
+		public float targetVerticalSize => (rectTransform.rect.height - layout.padding.top + layout.padding.bottom);
 
-		protected override void OnUpdateContent(StratusLayoutTextElementEntry entry)
-		{
-			text = entry.label;
-			if (entry.icon != null)
-			{
-				this.icon = entry.icon.value;
-				iconComponent.enabled = hasIcon;
-				iconFrame.gameObject.SetActive(hasIcon);
-				iconFrame.SetWidth(style.bodyHeight);
-			}
-		}
+		public bool hasIconFrame => iconFrame != null;
+		public bool hasHeaderFrame => headerFrame != null;
 
+		private StratusLayoutController iconLayout { get; set; }
 		protected override void OnInitialize(StratusLayoutTextElementEntry entry, StratusLayoutTextElementStyle style)
 		{
+			iconLayout = iconFrame.GetComponent<StratusLayoutController>();
+			iconFrame.enabled = false;
+
 			if (style != null)
 			{
 				if (style.textStyle.autoSizeText)
@@ -111,6 +112,43 @@ namespace Stratus.UI
 				body.alignment = style.textStyle.textAlignment;
 			}
 		}
+
+		protected override void OnUpdateContent(StratusLayoutTextElementEntry entry)
+		{
+			text = entry.text.value;
+
+			UpdateIconSize();
+
+			if (entry.icon != null && entry.icon.valid && hasIconFrame)
+			{
+				this.icon = entry.icon.value;
+				iconFrame.enabled = hasIconFrame;				
+				iconLayout.gameObject.SetActive(true);
+			}
+			else if (style.textStyle.hideIconFrame)
+			{
+				iconLayout.gameObject.SetActive(false);
+			}
+
+			if (entry.header != null && entry.header.valid && hasHeaderFrame)
+			{
+				this.headerFrame.text = entry.header.value;
+				this.headerFrame.gameObject.SetActive(true);
+			}
+			else
+			{
+				this.headerFrame.gameObject.SetActive(false);
+			}
+		}
+
+		private void UpdateIconSize()
+		{
+			float iconSize = style.textStyle.iconSize > 0 ? style.textStyle.iconSize
+			: targetVerticalSize;
+			iconLayout.size = new Vector2(iconSize, iconSize);
+		}
+
+
 	}
 
 }
