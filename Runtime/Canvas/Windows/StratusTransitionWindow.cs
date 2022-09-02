@@ -324,7 +324,7 @@ namespace Stratus.UI
 				transitionSelectAction = null;
 			}
 
-			if (transitions.Empty())
+			if (transitions.IsNullOrEmpty())
 			{
 				this.Log("No more transitions left...");
 				return false;
@@ -413,7 +413,7 @@ namespace Stratus.UI
 				this.Log("Continuing next frame (if there's no transitions queued up) ...");
 				InvokeNextFrame(() =>
 				{
-					if (transitions.Empty())
+					if (transitions.IsNullOrEmpty())
 					{
 						Continue();
 					}

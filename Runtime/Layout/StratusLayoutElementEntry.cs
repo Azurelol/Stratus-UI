@@ -13,7 +13,7 @@ namespace Stratus.UI
 		/// <summary>
 		/// The displayed string for this entry in the UI
 		/// </summary>
-		public StratusValue<string> text { get; set; }
+		public StratusProvider<string> text { get; set; }
 
 		/// <summary>
 		/// Action to be invoked when this entry is submitted (UI) / executed
@@ -40,7 +40,7 @@ namespace Stratus.UI
 
 		protected StratusLayoutElementEntry(string text)
 		{
-			this.text = new StratusValue<string>(text);
+			this.text = new StratusProvider<string>(text);
 		}
 
 		protected StratusLayoutElementEntry(string text, Action onSubmit)

@@ -127,7 +127,7 @@ namespace Stratus.UI
 
 		public void RemoveFirst()
 		{
-			if (_instances.NotEmpty())
+			if (_instances.IsValid())
 			{
 				ElementType first = _instances.First();
 				Destroy(first.gameObject);

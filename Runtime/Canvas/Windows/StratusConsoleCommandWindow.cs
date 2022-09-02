@@ -20,6 +20,8 @@ namespace Stratus.UI
 		private TMP_Text historyText = null;
 		[SerializeField]
 		private StratusLayoutTextElementGroupBehaviour matchesLayout = null;
+		[SerializeField]
+		private bool legacyInput = false;
 
 		[SerializeField]
 		private Color submitColor = StratusGUIStyles.Colors.azure;
@@ -66,7 +68,7 @@ namespace Stratus.UI
 
 		private void Update()
 		{
-			if (this.toggle.isDown)
+			if (legacyInput && this.toggle.isDown)
 			{
 				this.Toggle();
 				if (this.open)
@@ -80,7 +82,7 @@ namespace Stratus.UI
 				return;
 			}
 
-			if (this.submit.isDown && this.input.IsValid())
+			if (legacyInput && this.submit.isDown && this.input.IsValid())
 			{
 				this.Submit();
 			}

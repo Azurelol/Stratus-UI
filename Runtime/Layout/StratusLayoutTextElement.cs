@@ -3,14 +3,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Stratus;
 
 namespace Stratus.UI
 {
 	#region Data
 	public class StratusLayoutTextElementEntry : StratusLayoutElementEntry
 	{
-		public StratusValue<Sprite> icon { get; set; }
-		public StratusValue<string> header { get; set; }
+		public StratusProvider<Sprite> icon { get; set; }
+		public StratusProvider<string> header { get; set; }
 
 		public StratusLayoutTextElementEntry()
 		{

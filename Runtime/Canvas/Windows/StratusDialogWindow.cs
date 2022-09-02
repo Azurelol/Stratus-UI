@@ -109,12 +109,12 @@ namespace Stratus.UI
 
 		private void OnRequestEnded()
 		{
-			if (this.displays.NotEmpty())
+			if (this.displays.IsValid())
 			{
 				StratusDialogWindowRequestBehaviour request = displays.Dequeue();
 				request.DestroyGameObject();
 			}
-			if (this.displays.Empty())
+			else
 			{
 				Close();
 			}

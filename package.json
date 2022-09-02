@@ -1,12 +1,12 @@
 {
     "name": "com.stratus.ui",
-    "version": "0.1.0-preview",
+    "version": "1.0.0",
     "displayName": "Stratus UI",
     "description": "The UI package for the Stratus Framework",
-    "unity": "2019.1",
+    "unity": "2021.3",
     "unityRelease": "0b5",
     "dependencies": {
-      "com.stratus.core": "0.1.0",
+      "com.stratus.core": "1.0.0",
       "com.unity.textmeshpro": "2.0.1"
     },
     "keywords": [

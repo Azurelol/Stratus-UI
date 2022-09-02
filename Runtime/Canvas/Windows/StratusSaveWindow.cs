@@ -129,7 +129,7 @@ namespace Stratus.UI
 			this.Log($"Saving current save to index {index}");
 			saveSystem.Save(currentSave);
 
-			entry.text = new StratusValue<string>(GenerateSaveEntryName(save));
+			entry.text = new StratusProvider<string>(GenerateSaveEntryName(save));
 			entry.onSelect = () => Select(currentSave);
 			entry.onSubmit = () => Submit(currentSave);
 			entry.SetDirty();

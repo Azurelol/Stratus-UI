@@ -91,7 +91,7 @@ namespace Stratus.UI
 
         public override void Navigate(Vector2 dir)
         {
-            if (children.NotEmpty())
+            if (children.IsValid())
             {
                 if (dir.x > 0)
                 {

@@ -47,7 +47,7 @@ namespace Stratus.UI
 
 		public override void Select()
 		{
-			if (buttons.NotEmpty())
+			if (buttons.IsValid())
 			{
 				buttons.First().Select();
 			}
