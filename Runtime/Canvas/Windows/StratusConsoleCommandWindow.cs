@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Stratus.UI
 {
@@ -64,6 +65,11 @@ namespace Stratus.UI
 		protected override void OnWindowOpen()
 		{
 			ResetInputField();
+		}
+
+		protected override StratusInputUILayer GetInputLayer()
+		{
+			return new StratusInputUILayer(GetType().GetNiceName());
 		}
 
 		private void Update()
@@ -141,7 +147,7 @@ namespace Stratus.UI
 			if (matchesLayout != null)
 			{
 				List<StratusLayoutTextElementEntry> elements = new List<StratusLayoutTextElementEntry>();
-				foreach(var command in StratusConsoleCommand.commands)
+				foreach(var command in StratusConsoleCommand.commands.Where(c => !c.hidden))
 				{
 					elements.Add(new StratusLayoutTextElementEntry(command.name, () => SetInputField(command.name)));
 				}

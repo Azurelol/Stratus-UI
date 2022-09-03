@@ -35,6 +35,7 @@ namespace Stratus.UI
 		public Action onOpened;
 		public Action onClosed;
 		public bool ignoreInpuLayerBlocking;
+		public IStratusInputActionMap inputActions;
 
 		public StratusCanvasWindowOpenArguments()
 		{
@@ -184,7 +185,7 @@ namespace Stratus.UI
 		/// <summary>
 		/// The input layer used by this canvas window
 		/// </summary>
-		private StratusInputUILayer inputLayer { get; set; }
+		private StratusInputLayer inputLayer { get; set; }
 
 		/// <summary>
 		/// Whether this window is currently open
@@ -240,11 +241,11 @@ namespace Stratus.UI
 		{
 			get
 			{
-				if (openingArguments != null)
+				if (openArguments != null)
 				{
-					if (openingArguments.transitionSpeed != null)
+					if (openArguments.transitionSpeed != null)
 					{
-						return openingArguments.transitionSpeed.Value;
+						return openArguments.transitionSpeed.Value;
 					}
 				}
 				return _transitionSpeed;
@@ -254,12 +255,12 @@ namespace Stratus.UI
 		/// <summary>
 		/// Opening arguments for this window
 		/// </summary>
-		private StratusCanvasWindowOpenArguments openingArguments { get; set; }
+		private StratusCanvasWindowOpenArguments openArguments { get; set; }
 
 		/// <summary>
 		/// Closing arguments for this window
 		/// </summary>
-		private StratusCanvasWindowCloseArguments closingArguments { get; set; }
+		private StratusCanvasWindowCloseArguments closeArguments { get; set; }
 
 		/// <summary>
 		/// The current event system in the scene
@@ -269,7 +270,7 @@ namespace Stratus.UI
 		/// <summary>
 		/// If this window is opened upon the request of another, that is its parent
 		/// </summary>
-		public IStratusCanvasWindow parentWindow => openingArguments?.parent;
+		public IStratusCanvasWindow parentWindow => openArguments?.parent;
 
 		private GraphicRaycaster graphicRaycaster { get; set; }
 
@@ -364,7 +365,7 @@ namespace Stratus.UI
 
 		public void Open(StratusCanvasWindowOpenArguments args, Action onFinished = null)
 		{
-			this.openingArguments = args;
+			this.openArguments = args;
 			OnOpen(onFinished);
 		}
 
@@ -392,9 +393,17 @@ namespace Stratus.UI
 		/// <summary>
 		/// Requests this window to open if closed, close if open
 		/// </summary>
-		public void Toggle(Action onFinished = null)
+		public void Toggle(Action onFinished)
 		{
 			OnToggle(onFinished);
+		}
+
+		/// <summary>
+		/// Requests this window to open if closed, close if open
+		/// </summary>
+		public void Toggle()
+		{
+			Toggle(null);
 		}
 
 		/// <summary>
@@ -467,7 +476,6 @@ namespace Stratus.UI
 					this.LogError($"No selectable on {_selectableOnOpen}");
 				}
 			}
-			this.inputLayer = GetInputLayer();
 			this.Subscribe();
 			this.OnWindowAwake();
 			this.open = this.initiallyOpen;
@@ -483,6 +491,16 @@ namespace Stratus.UI
 			{
 				this.LogWarning("Window already open");
 				return;
+			}
+
+			if (openArguments != null && openArguments.inputActions != null)
+			{
+				inputLayer = new StratusDefaultInputLayer(openArguments.inputActions);
+			}
+			else
+			{
+				inputLayer = GetInputLayer();
+
 			}
 
 			this.Log("Opening");
@@ -512,7 +530,7 @@ namespace Stratus.UI
 			}
 
 			this.Log("Closing");
-			closingArguments = args;
+			closeArguments = args;
 
 			switch (this.transition)
 			{
@@ -551,7 +569,7 @@ namespace Stratus.UI
 			if (open)
 			{
 				this.canvasGroup.CrossFade(false);
-				this.canvas.enabled = true;
+				this.canvas.enabled = this.graphicRaycaster.enabled = true;
 				this.transitionRoutine = this.StartCoroutine(this.canvasGroup.ComposeCrossFade(1f, true, true, transitionSpeed,
 					() =>
 					{
@@ -564,7 +582,7 @@ namespace Stratus.UI
 				this.transitionRoutine = this.StartCoroutine(this.canvasGroup.ComposeCrossFade(0f, false, false, transitionSpeed,
 				() =>
 				{
-					this.canvas.enabled = false;
+					this.canvas.enabled = this.graphicRaycaster.enabled = false;
 					this.OnTransition(false, onFinished);
 				}));
 			}
@@ -602,21 +620,21 @@ namespace Stratus.UI
 			// Opening
 			if (open)
 			{
-				if (openingArguments != null)
+				if (openArguments != null)
 				{
-					if (openingArguments.parent != null
-						&& openingArguments.visibleOverParent)
+					if (openArguments.parent != null
+						&& openArguments.visibleOverParent)
 					{
 						previousSortingOrder = sortingOrder;
 						previousOverrideSorting = canvas.overrideSorting;
 
-						sortingOrder = openingArguments.parent.sortingOrder + 1;
+						sortingOrder = openArguments.parent.sortingOrder + 1;
 						canvas.overrideSorting = true;
 						this.Log($"Overriding sorting for child of {parentWindow}");
 					}
 
-					inputLayer.ignoreBlocking = openingArguments.ignoreInpuLayerBlocking;
-					openingArguments.onOpened?.Invoke();
+					inputLayer.ignoreBlocking = openArguments.ignoreInpuLayerBlocking;
+					openArguments.onOpened?.Invoke();
 				}
 
 				if (initialized)
@@ -633,27 +651,24 @@ namespace Stratus.UI
 			// Closing
 			else
 			{
-				if (inputLayer.pushed)
-				{
-					inputLayer.PopByEvent();
-				}
+				TryPopInputLayer();
 
 				if (initialized)
 				{
 					OnWindowClose();
 				}
 
-				if (openingArguments != null)
+				if (openArguments != null)
 				{
-					if (openingArguments.parent != null)
+					if (openArguments.parent != null)
 					{
-						if (closingArguments != null && closingArguments.recursive)
+						if (closeArguments != null && closeArguments.recursive)
 						{
-							openingArguments.parent.Close();
+							openArguments.parent.Close();
 						}
 						else
 						{
-							openingArguments.parent.Select();
+							openArguments.parent.Select();
 						}
 					}
 
@@ -665,15 +680,23 @@ namespace Stratus.UI
 						previousOverrideSorting = null;
 					}
 
-					openingArguments.onClosed?.Invoke();
-					openingArguments = null;
+					openArguments.onClosed?.Invoke();
+					openArguments = null;
 				}
 
-				closingArguments = null;
+				closeArguments = null;
 				this.open = false;
 				onFinished?.Invoke();
 			}
 
+		}
+
+		private void TryPopInputLayer()
+		{
+			if (inputLayer != null && inputLayer.pushed)
+			{
+				inputLayer.PopByEvent();
+			}
 		}
 
 		private void TryPushInputLayer()
@@ -682,9 +705,6 @@ namespace Stratus.UI
 			{
 				inputLayer.PushByEvent();
 			}
-
 		}
-
-
 	}
 }
