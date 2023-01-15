@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Stratus.Extensions;
 
 namespace Stratus.UI
 {

@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Stratus.Extensions;
 
 namespace Stratus.UI
 {
-    public class StratusRuntimeInspectorNumericDrawer : StratusRuntimeInspectorDrawer
+	public class StratusRuntimeInspectorNumericDrawer : StratusRuntimeInspectorDrawer
     {
         [SerializeField]
         private TMP_InputField inputField;

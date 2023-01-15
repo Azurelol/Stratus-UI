@@ -1,8 +1,10 @@
 {
     "name": "Stratus.UI",
+    "rootNamespace": "",
     "references": [
         "Stratus.Core",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "Stratus.NET"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -11,5 +13,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": []
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Stratus.Extensions;
+
 using System;
+
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Stratus.UI

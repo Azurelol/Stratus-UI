@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Stratus.Extensions;
 
 namespace Stratus.UI
 {
-    public abstract class StratusInputLayerActionButton<LayerActionType, PlayerInputType> : StratusBehaviour
+	public abstract class StratusInputLayerActionButton<LayerActionType, PlayerInputType> : StratusBehaviour
         where LayerActionType : System.Enum
         where PlayerInputType : IStratusPlayerInput
     {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Stratus.Extensions;
+
+using System;
 
 using TMPro;
 
