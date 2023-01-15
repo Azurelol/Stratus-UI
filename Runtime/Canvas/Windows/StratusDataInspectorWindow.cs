@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Stratus;
 using UnityEngine.UI;
 using System;
+using Stratus.Collections;
 
 namespace Stratus.UI
 {

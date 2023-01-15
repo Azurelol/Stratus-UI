@@ -15,7 +15,7 @@ namespace Stratus.UI
 
 	public abstract class StratusSaveWindow<T, SaveType, SaveSystem> : StratusCanvasWindow<T>
 		where T : StratusSaveWindow<T, SaveType, SaveSystem>
-		where SaveType : StratusSave, new()
+		where SaveType : class, IUnityStratusSave, new()
 		where SaveSystem : IStratusSaveSystem<SaveType>
 	{
 		//------------------------------------------------------------------------/

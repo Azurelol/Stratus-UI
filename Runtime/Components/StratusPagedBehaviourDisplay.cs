@@ -4,9 +4,10 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using Stratus.Collections;
 
 namespace Stratus.UI
-{	
+{
 	public abstract class StratusPagedBehaviourDisplay<BehaviourType> : StratusCanvasGroup
 		where BehaviourType : Behaviour
 	{
