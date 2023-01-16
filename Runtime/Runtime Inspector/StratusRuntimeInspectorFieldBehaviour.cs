@@ -4,10 +4,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Stratus.Extensions;
 
 namespace Stratus.UI
 {
-    public struct StratusRuntimeInspectorFieldSettings
+	public struct StratusRuntimeInspectorFieldSettings
     {
         public StratusSerializedField field;
         public StratusRuntimeInspectorDrawer drawer;

@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using Stratus.Extensions;
 
 namespace Stratus.UI
 {

@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Linq;
 using Stratus.Collections;
+using Stratus.Extensions;
 
 namespace Stratus.UI
 {
