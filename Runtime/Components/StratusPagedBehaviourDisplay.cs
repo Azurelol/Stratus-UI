@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Stratus.Collections;
+
 using System;
-using UnityEngine.UI;
+
 using TMPro;
-using Stratus.Collections;
+
+using UnityEngine;
 
 namespace Stratus.UI
 {
