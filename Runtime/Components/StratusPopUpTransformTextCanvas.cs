@@ -8,6 +8,7 @@ using System;
 using UnityEngine.SceneManagement;
 using Stratus;
 using System.Data;
+using Stratus.Utilities;
 
 namespace Stratus.UI
 {
