@@ -5,7 +5,7 @@ using Stratus.Extensions;
 
 namespace Stratus.UI
 {
-	public static partial class Extensions
+	public static class CanvasExtensions
 	{
 		public static IEnumerator ComposeCrossFade(this CanvasGroup canvasGroup, 
 			float alpha,
