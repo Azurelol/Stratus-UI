@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 using Stratus.Extensions;
+using Stratus.Models;
 
 namespace Stratus.UI
 {
