@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Stratus;
 using UnityEngine.UI;
+using Stratus.Reflection;
 
 namespace Stratus.UI
 {
-    public class StratusRuntimeInspectorDrawerSettings
+	public class StratusRuntimeInspectorDrawerSettings
     {
         public Transform parent;
         public StratusSerializedField field;

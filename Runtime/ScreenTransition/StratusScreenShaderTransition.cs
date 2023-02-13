@@ -1,6 +1,9 @@
+using Stratus.Interpolation;
+using Stratus.Unity.Interpolation;
 using Stratus.Utilities;
 
 using System;
+
 using UnityEngine;
 
 namespace Stratus.Experimental
@@ -92,7 +95,7 @@ namespace Stratus.Experimental
 		}
 		private Material m_Material { get; set; }
 		private bool m_maskInvert { get; set; }
-		private StratusActionSet currentSeq { get; set; }
+		private ActionSet currentSeq { get; set; }
 
 		//------------------------------------------------------------------------/
 		// Messages
