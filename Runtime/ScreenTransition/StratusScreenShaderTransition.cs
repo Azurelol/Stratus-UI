@@ -156,13 +156,13 @@ namespace Stratus.Experimental
 			// Create a sequence for the transition
 			this.currentSeq?.Cancel();
 			this.currentSeq = ActionSpace.Sequence(this);
-			ActionSpace.Property(this.currentSeq, () => this.maskValue, e.endingValue, e.speed, StratusEase.Linear);
+			ActionSpace.Property(this.currentSeq, () => this.maskValue, e.endingValue, e.speed, Ease.Linear);
 
 			// If the transition is of a fixed duration
 			if (e.duration > 0.0f)
 			{
 				ActionSpace.Delay(this.currentSeq, e.duration);
-				ActionSpace.Property(this.currentSeq, () => this.maskValue, e.initialValue, e.speed, StratusEase.Linear);
+				ActionSpace.Property(this.currentSeq, () => this.maskValue, e.initialValue, e.speed, Ease.Linear);
 			}
 		}
 

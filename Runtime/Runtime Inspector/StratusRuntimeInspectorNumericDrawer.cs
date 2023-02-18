@@ -7,6 +7,7 @@ using System;
 using Stratus.Extensions;
 using Stratus.Models;
 using Stratus.Reflection;
+using Stratus.Types;
 
 namespace Stratus.UI
 {
@@ -21,7 +22,7 @@ namespace Stratus.UI
         [SerializeField]
         private StratusOrientation inputOrientation = StratusOrientation.Horizontal;
 
-        private StratusNumericType numericType { get; set; }
+        private NumericType numericType { get; set; }
         private bool isPercentage { get; set; }
         private bool updatingValue { get; set; }
 
@@ -63,13 +64,13 @@ namespace Stratus.UI
         {
             if (settings.field.fieldType == StratusSerializedFieldType.Float)
             {
-                numericType = StratusNumericType.Float;
+                numericType = NumericType.Float;
                 slider.wholeNumbers = false;
 
             }
             else if (settings.field.fieldType == StratusSerializedFieldType.Integer)
             {
-                numericType = StratusNumericType.Integer;
+                numericType = NumericType.Integer;
                 slider.wholeNumbers = true;
             }
             else
@@ -82,7 +83,7 @@ namespace Stratus.UI
             {
                 slider.minValue = range.min;
                 slider.maxValue = range.max;
-                if (numericType == StratusNumericType.Float)
+                if (numericType == NumericType.Float)
                 {
                     isPercentage = range.min == 0 && range.max == 1;
                 }
@@ -94,10 +95,10 @@ namespace Stratus.UI
 
             switch (numericType)
             {
-                case StratusNumericType.Integer:
+                case NumericType.Integer:
                     inputField.contentType = TMP_InputField.ContentType.IntegerNumber;
                     break;
-                case StratusNumericType.Float:
+                case NumericType.Float:
                     inputField.contentType = TMP_InputField.ContentType.DecimalNumber;
                     break;
             }
@@ -112,14 +113,14 @@ namespace Stratus.UI
                 {
                     switch (numericType)
                     {
-                        case StratusNumericType.Integer:
+                        case NumericType.Integer:
                             {
                                 int parsedValue = int.Parse(value);
                                 settings.field.value = value;
                                 UpdateSliderValue(parsedValue, true);
                             }
                             break;
-                        case StratusNumericType.Float:
+                        case NumericType.Float:
                             {
                                 float parsedValue = float.Parse(value);
                                 settings.field.value = value;
