@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using Stratus.Extensions;
+using Stratus.Systems;
 
 namespace Stratus.UI
 {
@@ -54,7 +55,7 @@ namespace Stratus.UI
 		//------------------------------------------------------------------------/
 		protected override void OnWindowAwake()
 		{
-			StratusConsoleCommand.onEntry += this.OnConsoleCommandEntry;
+			ConsoleCommand.onEntry += this.OnConsoleCommandEntry;
 			this.history = string.Empty;
 			PopulateMatches();
 		}
@@ -113,7 +114,7 @@ namespace Stratus.UI
 		/// </summary>
 		public void Submit()
 		{
-			StratusConsoleCommand.Submit(this.input);
+			ConsoleCommand.Submit(this.input);
 			this.ResetInputField();
 		}
 
@@ -131,13 +132,13 @@ namespace Stratus.UI
 			this.inputField.SetTextWithoutNotify(text);
 		}
 
-		private void OnConsoleCommandEntry(StratusConsoleCommand.History.Entry e)
+		private void OnConsoleCommandEntry(ConsoleCommand.History.Entry e)
 		{
 			switch (e.type)
 			{
-				case StratusConsoleCommand.History.EntryType.Result:
-				case StratusConsoleCommand.History.EntryType.Warning:
-				case StratusConsoleCommand.History.EntryType.Error:
+				case ConsoleCommand.History.EntryType.Result:
+				case ConsoleCommand.History.EntryType.Warning:
+				case ConsoleCommand.History.EntryType.Error:
 					this.history = this.history.AppendLines($"[{e.timestamp.ToRichText(Color.green)}] {e.text.ToRichText(GetEntryColor(e.type))}");
 					break;
 			}
@@ -148,7 +149,7 @@ namespace Stratus.UI
 			if (matchesLayout != null)
 			{
 				List<StratusLayoutTextElementEntry> elements = new List<StratusLayoutTextElementEntry>();
-				foreach(var command in StratusConsoleCommand.commands.Where(c => !c.hidden))
+				foreach(var command in ConsoleCommand.commands.Where(c => !c.hidden))
 				{
 					elements.Add(new StratusLayoutTextElementEntry(command.name, () => SetInputField(command.name)));
 				}
@@ -156,17 +157,17 @@ namespace Stratus.UI
 			}
 		}
 
-		private Color GetEntryColor(StratusConsoleCommand.History.EntryType entryType)
+		private Color GetEntryColor(ConsoleCommand.History.EntryType entryType)
 		{
 			switch (entryType)
 			{
-				case StratusConsoleCommand.History.EntryType.Submit:
+				case ConsoleCommand.History.EntryType.Submit:
 					return this.submitColor;
-				case StratusConsoleCommand.History.EntryType.Result:
+				case ConsoleCommand.History.EntryType.Result:
 					return this.resultColor;
-				case StratusConsoleCommand.History.EntryType.Warning:
+				case ConsoleCommand.History.EntryType.Warning:
 					return this.warningColor;
-				case StratusConsoleCommand.History.EntryType.Error:
+				case ConsoleCommand.History.EntryType.Error:
 					return this.errorColor;
 				default:
 					return Color.white;
