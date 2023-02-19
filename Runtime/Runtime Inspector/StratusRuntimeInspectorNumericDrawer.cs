@@ -7,7 +7,7 @@ using System;
 using Stratus.Extensions;
 using Stratus.Models;
 using Stratus.Reflection;
-using Stratus.Types;
+using Stratus.Numerics;
 
 namespace Stratus.UI
 {
