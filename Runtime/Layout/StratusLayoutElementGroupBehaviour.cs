@@ -73,20 +73,20 @@ namespace Stratus.UI
 		//------------------------------------------------------------------------/
 		// Methods
 		//------------------------------------------------------------------------/
-		public StratusOperationResult Set(IEnumerable<EntryType> entries)
+		public Result Set(IEnumerable<EntryType> entries)
 		{
 			if (layoutGroup == null)
 			{
 				string msg = "No layout group has been set";
 				this.LogError(msg);
-				return new StratusOperationResult(false, msg);
+				return new Result(false, msg);
 			}
 			Clear();
 			Add(entries);
 			return true;
 		}
 
-		public StratusOperationResult Set(params EntryType[] elements) => Set((IEnumerable<EntryType>)elements);
+		public Result Set(params EntryType[] elements) => Set((IEnumerable<EntryType>)elements);
 
 		public void Add(params EntryType[] entries) => Add((IEnumerable<EntryType>)entries);
 
