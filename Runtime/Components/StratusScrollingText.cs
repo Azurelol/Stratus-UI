@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Stratus.Logging;
 
 namespace Stratus.UI
 {
-    public class StratusScrollingText : StratusBehaviour
+	public class StratusScrollingText : StratusBehaviour
     {
         [SerializeField]
         private TextAsset _textAsset;

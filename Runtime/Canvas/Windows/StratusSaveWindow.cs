@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 using Stratus.Extensions;
 using Stratus.Models.Saves;
+using Stratus.Logging;
 
 namespace Stratus.UI
 {
