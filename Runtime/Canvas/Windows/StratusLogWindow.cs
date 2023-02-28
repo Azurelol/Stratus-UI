@@ -5,6 +5,7 @@ using TMPro;
 using System.Text;
 using UnityEngine.UI;
 using Stratus.Extensions;
+using Stratus.Events;
 
 namespace Stratus.UI
 {
@@ -17,7 +18,7 @@ namespace Stratus.UI
 			Line
 		}
 
-		public class AddLineEvent : StratusEvent
+		public class AddLineEvent : Events.Event
 		{
 			public string line { get; set; }
 		}

@@ -1,3 +1,4 @@
+using Stratus.Events;
 using Stratus.Extensions;
 using Stratus.Logging;
 using Stratus.Utilities;
@@ -22,7 +23,7 @@ namespace Stratus.UI
 		//------------------------------------------------------------------------/
 		// Declarations
 		//------------------------------------------------------------------------/
-		public abstract class BaseTransitionEvent : StratusEvent
+		public abstract class BaseTransitionEvent : Events.Event
 		{
 			/// <summary>
 			/// How long to transition in and out

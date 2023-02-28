@@ -6,10 +6,11 @@ using TMPro;
 using UnityEngine.UI;
 using Stratus.Extensions;
 using Stratus.Logging;
+using Stratus.Events;
 
 namespace Stratus.UI
 {
-	public abstract class StratusDialogRequest : StratusEvent
+	public abstract class StratusDialogRequest : Events.Event
 	{
 		public string title { get; set; }
 		public Action onOpen { get; set; }

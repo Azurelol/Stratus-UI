@@ -10,6 +10,7 @@ using Stratus;
 using System.Data;
 using Stratus.Utilities;
 using Stratus.Logging;
+using Stratus.Events;
 
 namespace Stratus.UI
 {
@@ -19,7 +20,7 @@ namespace Stratus.UI
 	[Serializable]
 	public class StratusPopUpTransformText
 	{
-		public class InstantiateEvent : StratusEvent
+		public class InstantiateEvent : Events.Event
 		{
 			public StratusPopUpTransformText popUpText { get; private set; }
 			public InstantiateEvent(StratusPopUpTransformText popUpText)

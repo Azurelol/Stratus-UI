@@ -149,7 +149,7 @@ namespace Stratus.UI
 			if (matchesLayout != null)
 			{
 				List<StratusLayoutTextElementEntry> elements = new List<StratusLayoutTextElementEntry>();
-				foreach(var command in ConsoleCommand.commands.Where(c => !c.hidden))
+				foreach(var command in ConsoleCommand.commands.Value.Where(c => !c.hidden))
 				{
 					elements.Add(new StratusLayoutTextElementEntry(command.name, () => SetInputField(command.name)));
 				}

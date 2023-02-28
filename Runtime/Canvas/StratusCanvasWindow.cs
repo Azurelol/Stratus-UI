@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using Stratus.Extensions;
 using Stratus.Logging;
+using Stratus.Events;
 
 namespace Stratus.UI
 {
@@ -91,9 +92,9 @@ namespace Stratus.UI
 		//------------------------------------------------------------------------/
 		// Declarations
 		//------------------------------------------------------------------------/
-		public class RedirectInputEvent : StratusEvent { public StratusCanvasWindow<T> Window; }
+		public class RedirectInputEvent : Events.Event { public StratusCanvasWindow<T> Window; }
 
-		public class BaseEvent : StratusEvent
+		public class BaseEvent : Events.Event
 		{
 		}
 
@@ -112,8 +113,8 @@ namespace Stratus.UI
 			public Action onFinished { get; set; }
 		}
 
-		public class OpenedEvent : StratusEvent { }
-		public class ClosedEvent : StratusEvent { }
+		public class OpenedEvent : Events.Event { }
+		public class ClosedEvent : Events.Event { }
 
 		//------------------------------------------------------------------------/
 		// Fields

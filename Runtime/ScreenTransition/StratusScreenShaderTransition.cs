@@ -1,3 +1,4 @@
+using Stratus.Events;
 using Stratus.Interpolation;
 using Stratus.Unity.Interpolation;
 using Stratus.Utilities;
@@ -15,7 +16,7 @@ namespace Stratus.Experimental
 		// Event
 		//------------------------------------------------------------------------/
 		[Serializable]
-		public class TransitionEvent : StratusEvent
+		public class TransitionEvent : Events.Event
 		{
 			/// <summary>
 			/// The mask being used for this transition
