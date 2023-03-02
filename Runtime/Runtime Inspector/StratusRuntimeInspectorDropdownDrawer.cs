@@ -17,7 +17,7 @@ namespace Stratus.UI
         [SerializeField]
         private StratusOrientation inputOrientation = StratusOrientation.Horizontal;
         public override Selectable drawerSelectable => dropdown;
-        private StratusArrayNavigator<string> values { get; set; }
+        private ArrayNavigator<string> values { get; set; }
         public override Color bodyColor 
         {
             set => dropdown.itemText.color = value;
@@ -61,7 +61,7 @@ namespace Stratus.UI
                 case StratusSerializedFieldType.Float:
                     break;
                 case StratusSerializedFieldType.Enum:
-                    values = new StratusArrayNavigator<string>(settings.field.enumValueNames);
+                    values = new ArrayNavigator<string>(settings.field.enumValueNames);
                     break;
             }
 

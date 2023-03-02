@@ -28,7 +28,7 @@ namespace Stratus.UI
 		public abstract IStratusPrefs<DataType> prefs { get; }
 		protected StratusLabeledObject[] dataCategories { get; private set; }
 		public bool hasDataCategories => dataCategories != null;
-		protected StratusArrayNavigator<StratusLabeledObject> dataCategoryNavigator { get; set; }
+		protected ArrayNavigator<StratusLabeledObject> dataCategoryNavigator { get; set; }
 		private int lastDataCategoryIndex { get; set; }
 
 		//------------------------------------------------------------------------/
@@ -143,7 +143,7 @@ namespace Stratus.UI
 			{
 				dataCategories = new StratusLabeledObject[] { new StratusLabeledObject(prefs.dataTypeName, prefs.data) };
 			}
-			dataCategoryNavigator = new StratusArrayNavigator<StratusLabeledObject>(dataCategories, lastDataCategoryIndex);
+			dataCategoryNavigator = new ArrayNavigator<StratusLabeledObject>(dataCategories, lastDataCategoryIndex);
 			dataCategoryNavigator.onIndexChanged += this.OnDataCategoryChanged;
 
 			List<StratusLayoutTextElementEntry> entries = new List<StratusLayoutTextElementEntry>();

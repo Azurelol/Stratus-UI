@@ -40,7 +40,7 @@ namespace Stratus.UI
 		//------------------------------------------------------------------------/
 		private StratusFilteredStringList elementFilter { get; set; }
 		private List<ElementType> _instances { get; set; }
-		private StratusArrayNavigator<ElementType> navigator { get; set; }
+		private ArrayNavigator<ElementType> navigator { get; set; }
 		public string filter { get; set; }
 		public ElementType[] elements => _instances.ToArray();
 		public ElementType selectedInstance { get; private set; }
@@ -104,7 +104,7 @@ namespace Stratus.UI
 				element.onSelect += () => OnLayoutElementSelected(element);
 				_instances.Add(element);
 			}
-			navigator = new StratusArrayNavigator<ElementType>(_instances, true);
+			navigator = new ArrayNavigator<ElementType>(_instances, true);
 			if (explicitNavigation)
 			{
 				SetExplicitNavigation();

@@ -16,7 +16,7 @@ namespace Stratus.UI
 		protected bool closeOnLastPage = false;
 
 		private BehaviourType[] pages;
-		private StratusArrayNavigator<BehaviourType> navigator;
+		private ArrayNavigator<BehaviourType> navigator;
 
 		public int currentPageNumber => navigator.currentIndex;
 		public int lastPageNumber => navigator.lastIndex;
@@ -26,7 +26,7 @@ namespace Stratus.UI
 		protected override void OnInitialize()
 		{
 			pages = canvasGroup.GetComponentsInChildrenNotIncludeSelf<BehaviourType>(true);
-			navigator = new StratusArrayNavigator<BehaviourType>(pages, false);
+			navigator = new ArrayNavigator<BehaviourType>(pages, false);
 			navigator.onChanged += this.OnPageChanged;
 
 			foreach (var page in pages)

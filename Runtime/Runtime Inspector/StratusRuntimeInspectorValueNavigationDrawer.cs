@@ -23,7 +23,7 @@ namespace Stratus.UI
 		private StratusOrientation inputOrientation = StratusOrientation.Horizontal;
 		public override Selectable drawerSelectable { get; }
 
-		private StratusArrayNavigator<string> values { get; set; }
+		private ArrayNavigator<string> values { get; set; }
 		public override Color bodyColor
 		{
 			set
@@ -77,7 +77,7 @@ namespace Stratus.UI
 		protected override void OnSet(StratusRuntimeInspectorDrawerSettings settings)
 		{
 			(string[] values, int index) setup = GetValues(settings.field);
-			values = new StratusArrayNavigator<string>(setup.values, setup.index, false);
+			values = new ArrayNavigator<string>(setup.values, setup.index, false);
 			valueLabel.text = values.values[setup.index];
 			values.onIndexChanged += this.OnValueChanged;
 
