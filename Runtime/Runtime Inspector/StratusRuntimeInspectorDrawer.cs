@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using Stratus.Reflection;
+using Stratus.Inputs;
 
 namespace Stratus.UI
 {

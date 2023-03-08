@@ -14,10 +14,6 @@ namespace Stratus.UI
 		// Fields
 		//------------------------------------------------------------------------/
 		[SerializeField]
-		private StratusInputBinding toggle = new StratusInputBinding(KeyCode.BackQuote);
-		[SerializeField]
-		private StratusInputBinding submit = new StratusInputBinding(KeyCode.Return);
-		[SerializeField]
 		private TMP_InputField inputField = null;
 		[SerializeField]
 		private TMP_Text historyText = null;
@@ -76,24 +72,25 @@ namespace Stratus.UI
 
 		private void Update()
 		{
-			if (legacyInput && this.toggle.isDown)
-			{
-				this.Toggle();
-				if (this.open)
-				{
-					ResetInputField();
-				}
-			}
+			throw new NotImplementedException("Missing input handling");
+			//if (legacyInput && this.toggle.isDown)
+			//{
+			//	this.Toggle();
+			//	if (this.open)
+			//	{
+			//		ResetInputField();
+			//	}
+			//}
 
-			if (!this.open)
-			{
-				return;
-			}
+			//if (!this.open)
+			//{
+			//	return;
+			//}
 
-			if (legacyInput && this.submit.isDown && this.input.IsValid())
-			{
-				this.Submit();
-			}
+			//if (legacyInput && this.submit.isDown && this.input.IsValid())
+			//{
+			//	this.Submit();
+			//}
 		}
 
 		//------------------------------------------------------------------------/

@@ -8,6 +8,7 @@ using System.Linq;
 using Stratus.Extensions;
 using Stratus.Logging;
 using Stratus.Events;
+using Stratus.Inputs;
 
 namespace Stratus.UI
 {
