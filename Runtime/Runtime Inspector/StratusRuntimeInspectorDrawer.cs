@@ -13,7 +13,7 @@ namespace Stratus.UI
         public Transform parent;
         public StratusSerializedField field;
         public Action onDeselect;
-        public StratusInputLayer inputLayer;
+        public UnityInputLayer inputLayer;
         public float width;
         public StratusLayoutElementStyle style;
 

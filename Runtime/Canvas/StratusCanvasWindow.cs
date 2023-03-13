@@ -39,7 +39,7 @@ namespace Stratus.UI
 		public Action onOpened;
 		public Action onClosed;
 		public bool ignoreInpuLayerBlocking;
-		public IStratusInputActionMap inputActions;
+		public UnityInputActionMapHandler inputActions;
 
 		public StratusCanvasWindowOpenArguments()
 		{
@@ -189,7 +189,7 @@ namespace Stratus.UI
 		/// <summary>
 		/// The input layer used by this canvas window
 		/// </summary>
-		private StratusInputLayer inputLayer { get; set; }
+		private UnityInputLayer inputLayer { get; set; }
 
 		/// <summary>
 		/// Whether this window is currently open
@@ -499,7 +499,7 @@ namespace Stratus.UI
 
 			if (openArguments != null && openArguments.inputActions != null)
 			{
-				inputLayer = new StratusDefaultInputLayer(openArguments.inputActions);
+				inputLayer = new DefaultUnityInputLayer(openArguments.inputActions);
 			}
 			else
 			{
